@@ -14,11 +14,18 @@ const Students = () => {
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error :(</p>;
-
   console.log(data);
   return (
     <>
       <h2>Students List</h2>
+      {data.students.map((student, ind) => {
+        return (
+          <table key={ind}>
+            <td>{student.name}</td>
+            <td>{student.email}</td>
+          </table>
+        );
+      })}
     </>
   );
 };
