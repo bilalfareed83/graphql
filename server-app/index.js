@@ -14,14 +14,37 @@ const typeDefs = gql`
     age: Int
   }
 
+  input studentInput {
+    id: Int
+    name: String
+    email: String
+    age: Int
+  }
+
   type Query {
     students: [Student]
+  }
+
+  type Mutation {
+    addStudent(input: studentInput): Student
   }
 `;
 
 const resolvers = {
   Query: {
     students: () => students,
+  },
+  Mutation: {
+    addStudent(_, { input }) {
+      console.log(input);
+      students.push({
+        id: input.id,
+        name: input.name,
+        email: input.email,
+        age: input.age,
+      });
+      return input;
+    },
   },
 };
 
